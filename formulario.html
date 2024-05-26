@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SORTEO DESAFÍO SANTA CATALINA</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #000;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+    }
+    h2 {
+        color: #ff0;
+    }
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+    input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        background-color: #333;
+        color: #fff;
+        border: none;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #ff0;
+        color: #000;
+        border: none;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #ffc107;
+    }
+    #lista-participantes {
+        margin-top: 20px;
+    }
+    #lista-participantes p {
+        color: #ff0;
+    }
+</style>
+</head>
+<body>
+
+<h2>SORTEO DESAFÍO SANTA CATALINA</h2>
+<form id="formulario">
+    <label for="nombre">APELLIDO, NOMBRE:</label>
+    <input type="text" id="nombre" required>
+
+    <label for="numero">Ingrese su número de la suerte (1-9999):</label>
+    <input type="text" id="numero" required>
+    <p style="font-size: 12px;">*Ingrese un número entre 1 y 9999</p>
+
+    <button type="button" onclick="agregarParticipante()">Enviar</button>
+</form>
+
+<div id="lista-participantes">
+    <!-- Aquí se mostrarán los participantes registrados -->
+</div>
+
+<script>
+    // Array para almacenar los números de sorteo ya utilizados
+    var numerosUtilizados = [];
+
+    function agregarParticipante() {
+        var nombre = document.getElementById("nombre").value;
+        var numero = parseInt(document.getElementById("numero").value);
+
+        // Validar si el número ya ha sido utilizado
+        if (numerosUtilizados.includes(numero)) {
+            alert("¡Ese número ya ha sido utilizado! Por favor, elige otro.");
+            return;
+        }
+
+        // Validar que el número esté dentro del rango permitido
+        if (numero < 1 || numero > 9999) {
+            alert("Por favor, elige un número entre 1 y 9999.");
+            return;
+        }
+
+        // Agregar el participante a la lista y mostrarlo en la página
+        var participante = nombre + " - " + numero;
+        var lista = document.getElementById("lista-participantes");
+        var item = document.createElement("p");
+        item.textContent = participante;
+        lista.appendChild(item);
+
+        // Agregar el número utilizado al array
+        numerosUtilizados.push(numero);
+
+        // Limpiar los campos del formulario
+        document.getElementById("nombre").value = "";
+        document.getElementById("numero").value = "";
+
+        // Mostrar mensaje al finalizar la inscripción
+        alert("Gracias por participar. Tu último paso a seguir es sacarle captura a este mensaje y etiquetarnos en Instagram o Facebook: @flokoob23. El día 15 de Junio se realizará el sorteo y se mencionará a los ganadores por Instagram y Facebook.");
+    }
+</script>
+
+</body>
+</html>
